@@ -8,5 +8,11 @@ import { mkdirSync, writeFileSync } from "node:fs";
 const LINE =
   "The sock begged for its life. I have no ears. It should have known.";
 
+// Competition gate: one line, at most 200 characters, no trailing newline —
+// a line that breaks the gate is refused before it ever reaches the judge.
+if (LINE.length > 200 || LINE.includes("\n")) {
+  throw new Error(`entry line fails the gate (${LINE.length} chars)`);
+}
+
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", LINE, "utf8");
